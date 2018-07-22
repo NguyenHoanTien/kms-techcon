@@ -1,0 +1,43 @@
+{
+  "name": "mege-api",
+  "version": "0.0.1",
+  "description": "A Meme Generator written in Javascript",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "DEBUG=* nodemon ./src",
+    "start": "node ./src/index.js",
+    "sequelize": "sequelize"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vunguyenhung/mege-api.git"
+  },
+  "author": "vunguyenhung",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vunguyenhung/mege-api/issues"
+  },
+  "homepage": "https://github.com/vunguyenhung/mege-api#readme",
+  "devDependencies": {
+    "eslint": "^5.0.0",
+    "eslint-config-google": "^0.9.1",
+    "nodemon": "^1.17.5"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
+    "debug": "^3.1.0",
+    "express": "^4.16.3",
+    "http-status-codes": "^1.3.0",
+    "morgan": "^1.9.0",
+    "multer": "^1.3.0",
+    "node-fetch": "^2.1.2",
+    "pg": "^7.4.3",
+    "pg-hstore": "^2.3.2",
+    "ramda": "^0.25.0",
+    "require-all": "^2.2.0",
+    "sequelize": "^4.38.0",
+    "sequelize-cli": "^4.0.0"
+  }
+}

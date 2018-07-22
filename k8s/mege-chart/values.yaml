@@ -1,0 +1,30 @@
+postgresql:
+  postgresDatabase: mege
+  postgresUser: postgres
+  postgresPassword: postgres
+
+config:
+  debug: mege:*
+  imagesDir: /usr/.mege/images
+  dbHost: mege-postgresql
+  monitorHttpURL: http://mege-monitor:3002
+  monitorWsURL: ws://mege-monitor:3003
+
+migration:
+  imageName: vunguyenhung/mege-api
+  imageTag: a0d4cab
+
+monitor:
+  imageName: vunguyenhung/mege-monitor
+  imageTag: 2b49ff1
+
+api:
+  imageName: vunguyenhung/mege-api
+  imageTag: d0da3b9
+  replicaCount: 3
+  pvStorage: 3Gi
+
+frontend:
+  imageName: vunguyenhung/mege-frontend
+  imageTag: 5fb8dcb
+  replicaCount: 1

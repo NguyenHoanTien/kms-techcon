@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mege-monitor
+  labels:
+    app: mege-monitor
+spec:
+  type: NodePort
+  ports:
+    - port: 3002
+      targetPort: http
+      name: http
+    - port: 3003
+      targetPort: ws
+      name: ws
+  selector:
+    app: mege-monitor
+
+---
+
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: mege-monitor
+  labels:
+    app: mege-monitor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mege-monitor
+  template:
+    metadata:
+      labels:
+        app: mege-monitor
+    spec:
+      containers:
+      - image: "{{ .Values.monitor.imageName }}:{{ .Values.monitor.imageTag }}"
+        name: mege-monitor
+        ports:
+        - containerPort: 3002
+          name: http
+        - containerPort: 3003
+          name: ws
+        envFrom:
+        - configMapRef:
+            name: mege-env

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mege-env
+data:
+  DEBUG: "mege*"
+  MEGE_DB_USERNAME: postgres
+  MEGE_DB_PASSWORD: postgres
+  MEGE_DB_HOST: mege-db-postgresql
+  MEGE_DB_NAME: mege
+  MEGE_IMAGES_DIR: /usr/.mege/images
+  MEGE_MONITOR_HTTP_URL: http://mege-monitor:3002
+  MEGE_MONITOR_WS_URL: ws://mege-monitor:3003

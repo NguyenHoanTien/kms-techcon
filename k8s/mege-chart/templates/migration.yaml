@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: migration
+  annotations:
+    "helm.sh/hook": "post-install,pre-upgrade"
+    "helm.sh/hook-delete-policy": "hook-succeeded"
+spec:
+  template:
+    spec:
+      containers:
+      - image: "{{ .Values.migration.imageName }}:{{ .Values.migration.imageTag }}"
+        name: migration
+        command: ["npm", "run", "sequelize", "db:migrate"]
+        envFrom:
+        - configMapRef:
+            name: mege-env
+      restartPolicy: Never
+  backoffLimit: 1

@@ -1,0 +1,71 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mege-api
+  labels:
+    app: mege-api
+spec:
+  type: NodePort
+  ports:
+    - port: 3001
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app: mege-api
+
+---
+
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: mege-api-pv-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.api.pvStorage }}
+
+---
+
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: mege-api
+  labels:
+    app: mege-api
+spec:
+  replicas: {{ .Values.api.replicaCount }}
+  selector:
+    matchLabels:
+      app: mege-api
+  template:
+    metadata:
+      labels:
+        app: mege-api
+    spec:
+      volumes:
+        - name: mege-api-pv-storage
+          persistentVolumeClaim:
+            claimName: mege-api-pv-claim
+      containers:
+        - name: mege-api
+          image: {{ .Values.api.imageName }}:{{ .Values.api.imageTag }}
+          ports:
+            - name: http
+              containerPort: 3001
+              protocol: TCP
+          volumeMounts:
+            - mountPath: {{ .Values.config.imagesDir }}
+              name: mege-api-pv-storage
+          envFrom:
+            - configMapRef:
+                name: mege-env
+          lifecycle:
+            postStart:
+              exec:
+                command: ["bash", "./up.sh"]
+            preStop:
+              exec:
+                command: ["bash", "./down.sh"]

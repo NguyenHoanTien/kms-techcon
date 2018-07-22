@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: migration
+spec:
+  template:
+    spec:
+      containers:
+      - image: vunguyenhung/mege-api:a0d4cab
+        name: migration
+        command: ["npm", "run", "sequelize", "db:migrate"]
+        envFrom:
+        - configMapRef:
+            name: mege-env
+      restartPolicy: Never
+  backoffLimit: 1

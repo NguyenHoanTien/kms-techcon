@@ -1,0 +1,26 @@
+{
+  "name": "monitor",
+  "version": "0.0.0",
+  "description": "A Meme Generator written in Javascript",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node ./src/index.js"
+  },
+  "author": "vunguyenhung",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vunguyenhung/mege-monitor.git"
+  },
+  "dependencies": {
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "morgan": "^1.9.0",
+    "socket.io": "^2.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^5.1.0",
+    "eslint-config-google": "^0.9.1",
+    "nodemon": "^1.17.5"
+  }
+}

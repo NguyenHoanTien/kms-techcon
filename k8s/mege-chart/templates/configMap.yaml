@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mege-env
+data:
+  DEBUG: {{ .Values.config.debug }}
+  MEGE_DB_USERNAME: {{ .Values.postgresql.postgresUser }}
+  MEGE_DB_PASSWORD: {{ .Values.postgresql.postgresPassword }}
+  MEGE_DB_NAME: {{ .Values.postgresql.postgresDatabase }}
+  MEGE_DB_HOST: {{ .Values.config.dbHost }}
+  MEGE_IMAGES_DIR: {{ .Values.config.imagesDir }}
+  MEGE_MONITOR_HTTP_URL: {{ .Values.config.monitorHttpURL }}
+  MEGE_MONITOR_WS_URL: {{ .Values.config.monitorWsURL }}
